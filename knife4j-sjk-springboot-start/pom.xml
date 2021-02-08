@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Swagger_SpringBoot</artifactId>
+        <groupId>com.sjk.swagger</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>knife4j-sjk-springboot-start</artifactId>
+    <description>Spring Cloud微服务架构下,子服务无需引用前端UI模块,只需引入后端的Jar包</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.sjk.swagger</groupId>
+            <artifactId>knife4j-sjk-springboot-autoconfiguration</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

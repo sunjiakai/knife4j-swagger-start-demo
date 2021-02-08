@@ -1,0 +1,81 @@
+server:
+  port: 8085
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: @project.artifactId@
+  profiles:
+    active: dev
+# 只能配置在bootstrap.yml ，否则会生成 log.path_IS_UNDEFINED 文件夹
+# window会自动在 代码所在盘 根目录下自动创建文件夹，  如： D:/data/projects/logs
+logging:
+  #config: classpath:logback-spring.xml
+  file:
+    # 为什么要用绝对路径，而非相对路径？ 正式环境服务器磁盘通常是外挂到某个目录的，所以需要指定这个路径。 开发环境将所有系统日志存放在一起，便于后期清理日志文件，不用一个项目一个项目删除。
+    path: d://data//projects//logs
+    name: ${logging.file.path}/${spring.application.name}/root.log
+# 用于/actuator/info
+info:
+  name: '@project.name@'
+  description: '@project.description@'
+  version: '@project.version@'
+knife4j:
+  enable: true
+  production: false
+  documents:
+    - group: 2.X版本
+      name: 接口签名
+      locations: classpath:sign/*
+  setting:
+    language: zh-CN
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    swaggerModelName: 实体类列表
+    enableFooter: false
+    enableFooterCustom: true
+    footerCustomContent: Apache License 2.0 | Copyright  2019-[浙江八一菜刀研究基地](https://gitee.com/xiaoym/knife4j)
+sjk:
+  swagger:
+    license: Powered By sjk
+    licenseUrl: https://github.com/sjk
+    termsOfServiceUrl: https://github.com/sjk
+    version: 2.7.0
+    contact:
+      url: https://github.com/sjk
+      name: sjk
+      email: 306479353@qq.com
+    # apiKeys: # api key 不能设置默认参数，所以调整到全局参数中
+    #   - name: 用户身份token
+    #     keyname: token
+    #     passAs: header
+    global-operation-parameters:
+      - name: token
+        description: 用户身份token
+        modelRef: String
+        parameterType: header
+        required: true
+        # 默认值只是方便本地开发时，少填参数，生产环境请禁用swagger或者禁用默认参数
+        defaultValue: "Bearer test"
+      - name: Authorization
+        description: 客户端信息
+        modelRef: String
+        parameterType: header
+        required: true
+        defaultValue: "Basic enVpaG91X3VpOnp1aWhvdV91aV9zZWNyZXQ="
+      - name: tenant
+        description: 租户编码
+        modelRef: String
+        parameterType: header
+        required: true
+        defaultValue: "MDAwMA=="
+    host:
+      swagger:
+          enabled: false
+    docket:
+      demo:
+        title: 演示服务
+        base-package: com.knife4j.sjk.demo.controller
+      demo1:
+        title: 测试服务
+        base-package: com.knife4j.sjk.demo.controller

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="com/sjk/knife4j/logback/sjk-defaults.xml"/>
+
+    <springProfile name="test,docker,prod">
+        <logger name="com.sjk.knife4j.controller" additivity="true" level="${log.level.controller}">
+            <appender-ref ref="ASYNC_CONTROLLER_APPENDER"/>
+        </logger>
+    </springProfile>
+
+   <!-- <springProfile name="dev">
+        <logger name="com.sjk.knife4j.controller" additivity="true" level="${log.level.controller}">
+            <appender-ref ref="CONTROLLER_APPENDER"/>
+        </logger>
+    </springProfile>-->
+</configuration>
